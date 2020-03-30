@@ -1,0 +1,6 @@
+suites:
+    bytedance_suite:
+        namespace: Bytedance
+        psr4_prefix: Bytedance
+formatter.name: pretty
+
