@@ -111,7 +111,33 @@ class Qrcode
             $params['background'] = $background;
         }
         $params['set_icon'] = (empty($set_icon) ? false : true);
+
+        $this->_request->setJson(false);
         $rst = $this->_request->post($this->_url . 'qrcode', $params);
+        $rst = $this->getBody($rst);
         return $this->_client->rst($rst);
+    }
+
+    private function getBody($body)
+    {
+        $ret = array(
+            'errcode' => 0,
+            'errmsg' => '',
+            'qrcode' => ''
+        );
+
+        // 如果为空值就是错误
+        if (empty($body)) {
+            $ret['errcode'] = 99999;
+            $ret['errmsg'] = "生成失败";
+            return $ret;
+        }
+        $result = json_decode($body, true);
+        if (empty($result)) {
+            $ret['qrcode'] = $body;
+            return $ret;
+        } else {
+            return $result;
+        }
     }
 }
