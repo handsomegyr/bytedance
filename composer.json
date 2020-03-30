@@ -35,11 +35,11 @@
 	"clean": "rm -rf composer.lock build/ vendor/ && mkdir build",
 	"check": [
 		"vendor/bin/parallel-lint . --exclude vendor",
-		"vendor/bin/phploc --count-tests --log-csv build/phploc.csv --log-xml build/phploc.xml lib/Bytedance tests/Wechat",		
-		"vendor/bin/phpcpd --log-pmd build/pmd-cpd.xml lib/Bytedance tests/Wechat",		
+		"vendor/bin/phploc --count-tests --log-csv build/phploc.csv --log-xml build/phploc.xml lib/Bytedance tests/Bytedance",		
+		"vendor/bin/phpcpd --log-pmd build/pmd-cpd.xml lib/Bytedance tests/Bytedance",		
 		"vendor/bin/pdepend --jdepend-xml=build/jdepend.xml --jdepend-chart=build/dependencies.svg --overview-pyramid=build/overview-pyramid.svg lib/Bytedance",
-		"vendor/bin/phpmd tests/Wechat xml phpmd.xml --reportfile build/pmd.xml",
-		"vendor/bin/phpcs --report=checkstyle --standard=PSR2 --extensions=php --ignore=autoload.php --report-file=build/checkstyle.xml lib/Bytedance tests/Wechat",
+		"vendor/bin/phpmd tests/Bytedance xml phpmd.xml --reportfile build/pmd.xml",
+		"vendor/bin/phpcs --report=checkstyle --standard=PSR2 --extensions=php --ignore=autoload.php --report-file=build/checkstyle.xml lib/Bytedance tests/Bytedance",
 		"vendor/bin/phpcbf lib/Bytedance --standard=PSR2",
 		"vendor/bin/php-cs-fixer fix"
 	],

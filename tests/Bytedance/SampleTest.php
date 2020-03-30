@@ -13,7 +13,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     public function testAssertEquals(): void
     {
         $this->assertEquals('foo', 'foo');
-		#$this->assertEquals('foo', 'foo2');
+        #$this->assertEquals('foo', 'foo2');
     }
 
     /**
