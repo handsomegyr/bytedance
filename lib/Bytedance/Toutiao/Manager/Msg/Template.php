@@ -70,7 +70,7 @@ class Template
      * 示例
      * 请求：
 
-     *      * POST /api/apps/game/template/send HTTP/1.1
+     * POST /api/apps/game/template/send HTTP/1.1
      * Host: developer.toutiao.com
      * Content-Type: application/json
 
