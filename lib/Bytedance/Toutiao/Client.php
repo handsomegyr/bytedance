@@ -12,7 +12,7 @@ namespace Bytedance\Toutiao;
 
 use Bytedance\Toutiao\Manager\UserStorage;
 use Bytedance\Toutiao\Manager\Qrcode;
-use Bytedance\Toutiao\Manager\Template;
+use Bytedance\Toutiao\Manager\Msg;
 use Bytedance\Toutiao\Manager\Tags;
 
 class Client
@@ -92,13 +92,13 @@ class Client
     }
 
     /**
-     * 获取模板消息管理器
+     * 获取消息管理器
      *
-     * @return \Bytedance\Toutiao\Manager\Template
+     * @return \Bytedance\Toutiao\Manager\Msg
      */
-    public function getTemplateManager()
+    public function getMsgManager()
     {
-        return new Template($this);
+        return new Msg($this);
     }
 
     /**
@@ -121,16 +121,6 @@ class Client
         return new Tags($this);
     }
 
-    /**
-     * 获取内容安全管理器
-     *
-     * @return \Bytedance\Toutiao\Manager\Tags
-     */
-    public function getTagsManager()
-    {
-        return new Tags($this);
-    }
-    
     /**
      * 标准化处理服务端API的返回结果
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Bytedance\Toutiao\Manager;
+namespace Bytedance\Toutiao\Manager\Msg;
 
 use Bytedance\Toutiao\Client;
 
