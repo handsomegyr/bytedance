@@ -61,7 +61,7 @@ class Request
     }
 
     /**
-     * 获取微信服务器信息
+     * 获取服务器信息
      *
      * @param string $url            
      * @param array $params            
@@ -79,12 +79,12 @@ class Request
         if ($this->isSuccessful($response)) {
             return $this->getJson($response); // $response->json();
         } else {
-            throw new \Exception("微信服务器未有效的响应请求");
+            throw new \Exception("服务器未有效的响应请求");
         }
     }
 
     /**
-     * 推送消息给到微信服务器
+     * 推送消息给到服务器
      *
      * @param string $url            
      * @param array $params            
@@ -95,7 +95,7 @@ class Request
         $options['Content-Type'] = "application/json";
         $client = new \GuzzleHttp\Client($options);
         $query = $this->getQueryParam4AccessToken();
-        if (empty($queryParams)) {
+        if (!empty($queryParams)) {
             $query = array_merge($params, $queryParams);
         }
         $response = $client->post($url, array(
@@ -105,7 +105,7 @@ class Request
         if ($this->isSuccessful($response)) {
             return $this->getJson($response); // $response->json();
         } else {
-            throw new \Exception("微信服务器未有效的响应请求");
+            throw new \Exception("服务器未有效的响应请求");
         }
     }
 
@@ -150,7 +150,7 @@ class Request
         if ($this->isSuccessful($response)) {
             return $this->getJson($response); // $response->json();
         } else {
-            throw new \Exception("微信服务器未有效的响应请求");
+            throw new \Exception("服务器未有效的响应请求");
         }
     }
 
@@ -213,7 +213,7 @@ class Request
         if ($this->isSuccessful($response)) {
             return $this->getJson($response); // $response->json();
         } else {
-            throw new \Exception("微信服务器未有效的响应请求");
+            throw new \Exception("服务器未有效的响应请求");
         }
     }
 
@@ -244,7 +244,7 @@ class Request
                 'timeout' => 10,
                 'method' => "GET",
                 'header' => "Connection: close\r\n",
-                'user_agent' => 'iCatholic R&D'
+                'user_agent' => 'R&D'
             )
         );
         $context = stream_context_create($opts);
