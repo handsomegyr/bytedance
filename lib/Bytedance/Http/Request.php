@@ -69,7 +69,7 @@ class Request
      */
     public function get($url, $params = array(), $options = array())
     {
-        $options['Content-Type'] = "application/json";
+        $options['headers']['Content-Type'] = "application/json";
         $client = new \GuzzleHttp\Client($options);
         $query = $this->getQueryParam4AccessToken();
         $params = array_merge($params, $query);
@@ -92,7 +92,7 @@ class Request
      */
     public function post($url, $params = array(), $queryParams = array(), $options = array(), $body = '')
     {
-        $options['Content-Type'] = "application/json";
+        $options['headers']['Content-Type'] = "application/json";
         $client = new \GuzzleHttp\Client($options);
         $query = $this->getQueryParam4AccessToken();
         if (!empty($queryParams)) {
