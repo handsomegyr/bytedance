@@ -101,6 +101,7 @@ class Qrcode
         }
 
         $params = array();
+        $params['appname'] = $appname;
         $params['path'] = \urlencode($path);
         $params['access_token'] = $this->_client->getAccessToken();
         $params['width'] = $width;
