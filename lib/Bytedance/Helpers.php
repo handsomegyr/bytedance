@@ -121,4 +121,34 @@ class Helpers
 
         return md5(urldecode(http_build_query($data)) . $app_secret);
     }
+
+    /**
+     * 请求签名算法
+     * 发往小程序服务端的请求，在没有特殊说明时，均需要使用担保支付秘钥进行签名，用于保证请求的来源：
+     * sign, app_id , thirdparty_id 字段用于标识身份字段，不参与签名。
+     * 将其他字段内容（不包含 key）与支付 SALT 一起进行字典序排序后，使用&符号链接
+     * 使用 md5 算法对该字符串计算摘要，作为结果
+     * 参与加签的字段均以 POST 请求中的 body 内容为准, 不考虑参数默认值等规则. 
+     * 对于对象类型与数组类型的参数, 使用 POST 中的字符串原串进行左右去除空格后进行加签
+     * 如有其他安全性需要, 可以在请求中添加 nonce 字段, 该字段无任何业务影响, 仅影响加签内容, 使同一请求的多次签名不同.
+     */
+    public static function sign(array $map)
+    {
+        $rList = array();
+        foreach ($map as $k => $v) {
+            if ($k == "other_settle_params" || $k == "app_id" || $k == "sign" || $k == "thirdparty_id")
+                continue;
+            $value = trim(strval($v));
+            $len = strlen($value);
+            if ($len > 1 && substr($value, 0, 1) == "\"" && substr($value, $len, $len - 1) == "\"")
+                $value = substr($value, 1, $len - 1);
+            $value = trim($value);
+            if ($value == "" || $value == "null")
+                continue;
+            array_push($rList, $value);
+        }
+        array_push($rList, "your_payment_salt");
+        sort($rList, 2);
+        return md5(implode('&', $rList));
+    }
 }
