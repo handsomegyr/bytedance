@@ -10,7 +10,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers \SampleTest::testAssertEquals()
      */
-    public function testAssertEquals(): void
+    public function testAssertEquals()
     {
         $this->assertEquals('foo', 'foo');
         #$this->assertEquals('foo', 'foo2');
@@ -19,7 +19,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers \SampleTest::testAssertSame()
      */
-    public function testAssertSame(): void
+    public function testAssertSame()
     {
         $this->assertSame('first', 'first');
     }
@@ -27,7 +27,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers \SampleTest::testAssertTrue()
      */
-    public function testAssertTrue(): void
+    public function testAssertTrue()
     {
         $this->assertTrue(true);
     }
@@ -35,7 +35,7 @@ class SampleTest extends \PHPUnit\Framework\TestCase
     /**
      * @covers \SampleTest::testAssertFalse()
      */
-    public function testAssertFalse(): void
+    public function testAssertFalse()
     {
         $this->assertFalse(false);
     }

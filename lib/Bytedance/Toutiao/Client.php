@@ -3,6 +3,7 @@
 /**
  * 服务端 API
  * 字节跳动小程序、小游戏给开发者提供了服务端使用的 HTTPS API 接口。
+ * https://microapp.bytedance.com/docs/zh-CN/mini-app/develop/server/server-api-introduction
  * 
  * @author guoyongrong <handsomegyr@126.com>
  *
@@ -10,30 +11,44 @@
 
 namespace Bytedance\Toutiao;
 
-use Bytedance\Toutiao\Manager\UserStorage;
+use Bytedance\Toutiao\Manager\Storage;
 use Bytedance\Toutiao\Manager\Qrcode;
 use Bytedance\Toutiao\Manager\Msg;
 use Bytedance\Toutiao\Manager\Tags;
 
 class Client
 {
-
+    private $_app_id = null;
     private $_accessToken = null;
-
-    private $_snsAccessToken = null;
-
-    private $_from = null;
-
-    private $_to = null;
-
     private $_request = null;
-
-    private $_signature = null;
-
-    private $_verifyToken = null;
-
-    public function __construct()
+    public function __construct($app_id = "", $access_token = "")
     {
+        $this->_app_id = $app_id;
+        $this->_accessToken = $access_token;
+    }
+
+    /**
+     * 获取服务端的appid
+     *
+     * @throws Exception
+     */
+    public function getAppid()
+    {
+        if (empty($this->_app_id)) {
+            throw new \Exception("请设定app_id");
+        }
+        return $this->_app_id;
+    }
+
+    /**
+     * 设定服务端的appid
+     *
+     * @param string $app_id        	
+     */
+    public function setAppid($app_id)
+    {
+        $this->_app_id = $app_id;
+        return $this;
     }
 
     /**
@@ -52,7 +67,7 @@ class Client
     /**
      * 设定服务端的access token
      *
-     * @param string $accessToken            
+     * @param string $accessToken        	
      */
     public function setAccessToken($accessToken)
     {
@@ -88,7 +103,7 @@ class Client
      */
     public function getUserStorageManager()
     {
-        return new UserStorage($this);
+        return new Storage($this);
     }
 
     /**

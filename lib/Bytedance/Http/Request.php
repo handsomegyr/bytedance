@@ -265,6 +265,26 @@ class Request
         );
     }
 
+    public function postByfileGetContents($url, $params)
+    {
+        $params = \json_encode($params, JSON_UNESCAPED_UNICODE);
+        $opts = array(
+            'http' => array(
+                'follow_location' => 3,
+                'max_redirects' => 3,
+                'timeout' => 10,
+                'method' => "POST",
+                'header' => "Content-Type: application/json;charset=uft-8",
+                'content' => $params
+            ),
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            )
+        );
+        $context = stream_context_create($opts);
+        return file_get_contents($url, false, $context);
+    }
     /**
      * 将指定文件名和内容的数据，保存到临时文件中，在析构函数中删除临时文件
      *

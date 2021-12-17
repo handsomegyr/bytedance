@@ -9,12 +9,11 @@
 namespace Bytedance\Toutiao\Manager;
 
 use Bytedance\Toutiao\Client;
-use Bytedance\Toutiao\Manager\Msg\Template;
+use Bytedance\Toutiao\Manager\Msg\SubscribeNotification;
 
 class Msg
 {
     private $_client;
-
     public function __construct(Client $client)
     {
         $this->_client = $client;
@@ -23,10 +22,10 @@ class Msg
     /**
      * 获取模板消息管理器
      *
-     * @return \Bytedance\Toutiao\Manager\Msg\Template
+     * @return \Bytedance\Toutiao\Manager\Msg\SubscribeNotification
      */
     public function getTemplateSender()
     {
-        return new Template($this->_client);
+        return new SubscribeNotification($this->_client);
     }
 }

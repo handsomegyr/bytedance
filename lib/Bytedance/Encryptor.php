@@ -37,7 +37,7 @@ class Encryptor
      * @return string
      * @throws Exception
      */
-    public function pkcs7Pad(string $text, int $blockSize): string
+    public function pkcs7Pad(string $text, int $blockSize)
     {
         if ($blockSize > 256) {
             throw new \Exception('$blockSize may not be more than 256');
@@ -55,7 +55,7 @@ class Encryptor
      *
      * @return string
      */
-    public function pkcs7Unpad(string $text): string
+    public function pkcs7Unpad(string $text)
     {
         $pad = ord(substr($text, -1));
         if ($pad < 1 || $pad > $this->blockSize) {
@@ -75,7 +75,7 @@ class Encryptor
      * @return array
      * @throws Exception
      */
-    public function decryptData(string $sessionKey, string $iv, string $encrypted): array
+    public function decryptData(string $sessionKey, string $iv, string $encrypted)
     {
         $plainText = openssl_decrypt(
             base64_decode($encrypted),
@@ -103,7 +103,7 @@ class Encryptor
      * @return string
      * @throws \Exception
      */
-    public function encryptData(string $sessionKey, string $iv, $data = []): string
+    public function encryptData(string $sessionKey, string $iv, $data = [])
     {
         // 反加密字节跳动小程序获取到的授权信息，发现php json_encode出来的json字符串与解密得到的不一致，要特殊处理
         $str = str_replace('\\', '', json_encode($data, JSON_UNESCAPED_UNICODE));
