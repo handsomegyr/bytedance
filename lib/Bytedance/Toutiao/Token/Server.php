@@ -17,10 +17,34 @@ class Server
 
     private $_secret = null;
 
+    private $_context;
+
     public function __construct($appid, $secret)
     {
+        if (empty($appid)) {
+            throw new \Exception('请设定$appid');
+        }
+        if (empty($secret)) {
+            throw new \Exception('请设定$secret');
+        }
+
         $this->_appid = $appid;
         $this->_secret = $secret;
+
+        $opts = array(
+            'http' => array(
+                'follow_location' => 3,
+                'max_redirects' => 3,
+                'timeout' => 10,
+                'method' => "GET",
+                'header' => "Connection: close\r\n"
+            ),
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            )
+        );
+        $this->_context = stream_context_create($opts);
     }
 
     /**
@@ -55,7 +79,7 @@ class Server
     public function getAccessToken()
     {
         $url = "https://developer.toutiao.com/api/apps/token?grant_type=client_credential&appid={$this->_appid}&secret={$this->_secret}";
-        return json_decode(file_get_contents($url), true);
+        return json_decode(file_get_contents($url, false, $this->_context), true);
     }
 
     public function __destruct()
