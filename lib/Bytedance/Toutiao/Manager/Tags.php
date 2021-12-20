@@ -123,7 +123,9 @@ class Tags
         // X-Token 小程序 access_token，参考登录凭证检验
         $headers = array();
         $headers['X-Token'] = $this->_client->getAccessToken();
-        $rst = $this->_request->post($this->_url . 'text/antidirt', $params, $headers);
+        $options = array();
+        $options['headers'] = $headers;
+        $rst = $this->_request->post($this->_url . 'text/antidirt', $params, array(), $options);
         return $this->_client->rst($rst);
     }
 
@@ -292,8 +294,7 @@ class Tags
         $params['access_token'] = $this->_client->getAccessToken();
         $params['image'] = $image;
         $params['image_data'] = $image_data;
-        $headers = array();
-        $rst = $this->_request->post('https://developer.toutiao.com/api/apps/censor/image', $params, $headers);
+        $rst = $this->_request->post('https://developer.toutiao.com/api/apps/censor/image', $params, array());
         return $this->_client->rst($rst);
     }
 }

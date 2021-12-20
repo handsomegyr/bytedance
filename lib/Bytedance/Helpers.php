@@ -132,7 +132,7 @@ class Helpers
      * 对于对象类型与数组类型的参数, 使用 POST 中的字符串原串进行左右去除空格后进行加签
      * 如有其他安全性需要, 可以在请求中添加 nonce 字段, 该字段无任何业务影响, 仅影响加签内容, 使同一请求的多次签名不同.
      */
-    public static function sign(array $map)
+    public static function sign(array $map, $payment_salt)
     {
         $rList = array();
         foreach ($map as $k => $v) {
@@ -147,7 +147,7 @@ class Helpers
                 continue;
             array_push($rList, $value);
         }
-        array_push($rList, "your_payment_salt");
+        array_push($rList, $payment_salt);
         sort($rList, 2);
         return md5(implode('&', $rList));
     }

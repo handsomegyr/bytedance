@@ -20,11 +20,11 @@ class Msg
     }
 
     /**
-     * 获取模板消息管理器
+     * 获取订阅消息管理器
      *
      * @return \Bytedance\Toutiao\Manager\Msg\SubscribeNotification
      */
-    public function getTemplateSender()
+    public function getSubscribeNotificationManager()
     {
         return new SubscribeNotification($this->_client);
     }
