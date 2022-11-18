@@ -18,6 +18,8 @@ use Bytedance\Toutiao\Manager\Msg;
 use Bytedance\Toutiao\Manager\Tags;
 use Bytedance\Toutiao\Manager\ConvertVideoId;
 use Bytedance\Toutiao\Manager\Ecpay;
+use Bytedance\Toutiao\Manager\Urllink;
+use Bytedance\Toutiao\Manager\Chat;
 
 class Client
 {
@@ -167,6 +169,26 @@ class Client
     public function getEcpayManager()
     {
         return new Ecpay($this);
+    }
+
+    /**
+     * 获取Urllink管理器
+     *
+     * @return \Bytedance\Toutiao\Manager\Urllink
+     */
+    public function getUrllinkManager()
+    {
+        return new Urllink($this);
+    }
+
+    /**
+     * 获取Chat管理器
+     *
+     * @return \Bytedance\Toutiao\Manager\Chat
+     */
+    public function getChatManager()
+    {
+        return new Chat($this);
     }
 
     /**
